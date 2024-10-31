@@ -4,8 +4,9 @@ from django.shortcuts import render, redirect
 from django.views import generic
 
 from django.contrib.auth.mixins import LoginRequiredMixin
-
+from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
+from django.contrib import messages
 
 from .models import Categoria,SubCategoria, Marca, UnidadMedida, Producto
 
@@ -17,7 +18,7 @@ class CategoriaView(LoginRequiredMixin, generic.ListView):
     context_object_name = "obj"
     login_url = 'bases:login'
 
-class CategoriaNew(LoginRequiredMixin, generic.CreateView):
+class CategoriaNew(SuccessMessageMixin,LoginRequiredMixin, generic.CreateView):
     
     model=Categoria
     template_name="inv/categoria_form.html"
@@ -31,21 +32,21 @@ class CategoriaNew(LoginRequiredMixin, generic.CreateView):
         form.instance.uc = self.request.user
         return super().form_valid(form)
     
-class CategoriaEdit(LoginRequiredMixin, generic.UpdateView):
+class CategoriaEdit(SuccessMessageMixin,LoginRequiredMixin, generic.UpdateView):
     
     model=Categoria
     template_name="inv/categoria_form.html"
     context_object_name = "obj"
     form_class=CategoriaForm
     success_url=reverse_lazy("inv:categoria_list")
-    #success_message="Categoria Creada Satisfactoriamente"
+    success_message="Categoria Editada Satisfactoriamente"
     login_url = 'bases:login'
 
     def form_valid(self, form):
         form.instance.um = self.request.user.id
         return super().form_valid(form)
     
-class CategoriaDel(LoginRequiredMixin, generic.DeleteView):
+class CategoriaDel(SuccessMessageMixin,LoginRequiredMixin, generic.DeleteView):
     permission_required="inv.delete_categoria"
     model=Categoria
     template_name='inv/catalogos_del.html'
@@ -59,13 +60,13 @@ class SubCategoriaView(LoginRequiredMixin, generic.ListView):
     template_name = "inv/subcategoria_list.html"
     context_object_name = "obj"
 
-class SubCategoriaNew(LoginRequiredMixin, generic.CreateView):
+class SubCategoriaNew(SuccessMessageMixin,LoginRequiredMixin, generic.CreateView):
     model=SubCategoria
     template_name="inv/subcategoria_form.html"
     context_object_name = "obj"
     form_class=SubCategoriaForm
     success_url=reverse_lazy("inv:subcategoria_list")
-    #success_message="Sub Categoría Creada Satisfactoriamente"
+    success_message="Sub Categoría Creada Satisfactoriamente"
     #permission_required="inv.add_subcategoria"
     login_url = 'bases:login'
 
@@ -73,7 +74,7 @@ class SubCategoriaNew(LoginRequiredMixin, generic.CreateView):
         form.instance.uc = self.request.user
         return super().form_valid(form)
     
-class SubCategoriaEdit(LoginRequiredMixin, generic.UpdateView):
+class SubCategoriaEdit(SuccessMessageMixin,LoginRequiredMixin, generic.UpdateView):
     model=SubCategoria
     template_name="inv/subcategoria_form.html"
     context_object_name = "obj"
@@ -86,7 +87,7 @@ class SubCategoriaEdit(LoginRequiredMixin, generic.UpdateView):
         form.instance.um = self.request.user.id
         return super().form_valid(form)
 
-class SubCategoriaDel(LoginRequiredMixin, generic.DeleteView):
+class SubCategoriaDel(SuccessMessageMixin,LoginRequiredMixin, generic.DeleteView):
     model=SubCategoria
     template_name='inv/catalogos_del.html'
     context_object_name='obj'
@@ -101,7 +102,7 @@ class MarcaView(LoginRequiredMixin, generic.ListView):
     context_object_name = "obj"
     login_url = 'bases:login'
 
-class MarcaNew(LoginRequiredMixin, generic.CreateView):
+class MarcaNew(SuccessMessageMixin,LoginRequiredMixin, generic.CreateView):
     model=Marca
     template_name="inv/marca_form.html"
     context_object_name = 'obj'
@@ -116,7 +117,7 @@ class MarcaNew(LoginRequiredMixin, generic.CreateView):
         return super().form_valid(form)
 
 
-class MarcaEdit(LoginRequiredMixin, generic.UpdateView):
+class MarcaEdit(SuccessMessageMixin,LoginRequiredMixin, generic.UpdateView):
     model=Marca
     template_name="inv/marca_form.html"
     context_object_name = 'obj'
@@ -147,6 +148,7 @@ def marca_inactivar(request, id):
         marca.estado=False
         marca.save()
         #(request, 'Marca Inactivada')
+        messages.success(request, 'Marca Inactivada')
         return redirect("inv:marca_list")
   
     return render(request,template_name,contexto)
@@ -160,7 +162,7 @@ class UMView(LoginRequiredMixin, generic.ListView):
     login_url = 'bases:login'
 
 
-class UMNew(LoginRequiredMixin, generic.CreateView):
+class UMNew(SuccessMessageMixin,LoginRequiredMixin, generic.CreateView):
     model=UnidadMedida
     template_name="inv/um_form.html"
     context_object_name = 'obj'
@@ -176,7 +178,7 @@ class UMNew(LoginRequiredMixin, generic.CreateView):
         return super().form_valid(form)
 
 
-class UMEdit(LoginRequiredMixin, generic.UpdateView):
+class UMEdit(SuccessMessageMixin,LoginRequiredMixin, generic.UpdateView):
     model=UnidadMedida
     template_name="inv/um_form.html"
     context_object_name = 'obj'
@@ -219,7 +221,7 @@ class ProductoView(LoginRequiredMixin, generic.ListView):
     permission_required="inv.view_producto"
     login_url = 'bases:login'
 
-class ProductoNew(LoginRequiredMixin, generic.CreateView):
+class ProductoNew(SuccessMessageMixin,LoginRequiredMixin, generic.CreateView):
     model=Producto
     template_name="inv/producto_form.html"
     context_object_name = 'obj'
@@ -242,7 +244,7 @@ class ProductoNew(LoginRequiredMixin, generic.CreateView):
 
 
 
-class ProductoEdit(LoginRequiredMixin, generic.UpdateView):
+class ProductoEdit(SuccessMessageMixin,LoginRequiredMixin, generic.UpdateView):
     model=Producto
     template_name="inv/producto_form.html"
     context_object_name = 'obj'

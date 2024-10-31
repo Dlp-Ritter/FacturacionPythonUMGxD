@@ -39,12 +39,13 @@ $(document).ready(function(){
         }
     });
 
-  $("#btnInactivar").click(function(e){
+    $("#btnInactivar").click(function(e){
       e.preventDefault();
       //alert("Probando");
 
       var id = {{ obj.id }};
       var template="{% url 'cmp:proveedor_inactivar' obj.id %}";
+      //template += id;
       var data = {"id":id};
       data = JSON.stringify(data);
 
@@ -58,7 +59,7 @@ $(document).ready(function(){
         success: function(response){
           console.log(response);
           cerrar_modal();
-          alert(response);
+          //alert(response);
           var tipo=(response.startsWith('Proveedor no existe') ? 'red':'green' );
           mensaje(response,tipo);
         },
