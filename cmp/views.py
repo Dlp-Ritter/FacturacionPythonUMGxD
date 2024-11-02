@@ -1,30 +1,29 @@
 from django.shortcuts import render,redirect
 from django.views import generic
 from django.urls import reverse_lazy
-#import datetime
+import datetime
 from django.http import HttpResponse, JsonResponse
 
-from django.contrib.auth.mixins import LoginRequiredMixin
-
-#from django.contrib.auth.decorators import login_required, permission_required
-#from django.http import HttpResponse
+from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib.auth.decorators import login_required, permission_required
+from django.http import HttpResponse
 import json
-#from django.db.models import Sum
+from django.db.models import Sum
 
-from .models import Proveedor 
-from cmp.forms import ProveedorForm
-#from bases.views import SinPrivilegios
-#from inv.models import Producto
+from .models import Proveedor, ComprasEnc, ComprasDet
+from cmp.forms import ProveedorForm,ComprasEncForm
+from bases.views import SinPrivilegios
+from inv.models import Producto
 
 
-class ProveedorView(LoginRequiredMixin, generic.ListView):
+class ProveedorView(SinPrivilegios, generic.ListView):
     model = Proveedor
     template_name = "cmp/proveedor_list.html"
     context_object_name = "obj"
     permission_required="cmp.view_proveedor"
-    login_url = 'bases:login'
 
-class ProveedorNew(LoginRequiredMixin, generic.CreateView):
+class ProveedorNew(SuccessMessageMixin, SinPrivilegios,\
+                   generic.CreateView):
     model=Proveedor
     template_name="cmp/proveedor_form.html"
     context_object_name = 'obj'
@@ -32,15 +31,15 @@ class ProveedorNew(LoginRequiredMixin, generic.CreateView):
     success_url= reverse_lazy("cmp:proveedor_list")
     success_message="Proveedor Nuevo"
     permission_required="cmp.add_proveedor"
-    login_url = 'bases:login'
 
     def form_valid(self, form):
         form.instance.uc = self.request.user
-        print(self.request.user.id)
+        #print(self.request.user.id)
         return super().form_valid(form)
 
 
-class ProveedorEdit(LoginRequiredMixin, generic.UpdateView):
+class ProveedorEdit(SuccessMessageMixin, SinPrivilegios,\
+                   generic.UpdateView):
     model=Proveedor
     template_name="cmp/proveedor_form.html"
     context_object_name = 'obj'
@@ -48,7 +47,6 @@ class ProveedorEdit(LoginRequiredMixin, generic.UpdateView):
     success_url= reverse_lazy("cmp:proveedor_list")
     success_message="Proveedor Editado"
     permission_required="cmp.change_proveedor"
-    login_url = 'bases:login'
 
     def form_valid(self, form):
         form.instance.um = self.request.user.id
@@ -56,8 +54,8 @@ class ProveedorEdit(LoginRequiredMixin, generic.UpdateView):
         return super().form_valid(form)
 
 
-#@login_required(login_url="/login/")
-#@permission_required("cmp.change_proveedor",login_url="/login/")
+@login_required(login_url="/login/")
+@permission_required("cmp.change_proveedor",login_url="/login/")
 def proveedorInactivar(request,id):
     template_name='cmp/inactivar_prv.html'
     contexto={}
@@ -77,12 +75,12 @@ def proveedorInactivar(request,id):
 
     return render(request,template_name,contexto)
 
-"""
 class ComprasView(SinPrivilegios, generic.ListView):
     model = ComprasEnc
     template_name = "cmp/compras_list.html"
     context_object_name = "obj"
     permission_required="cmp.view_comprasenc"
+ 
 
 
 @login_required(login_url='/login/')
@@ -116,7 +114,7 @@ def compras(request,compra_id=None):
             det=None
         
         contexto={'productos':prod,'encabezado':enc,'detalle':det,'form_enc':form_compras}
-
+        
     if request.method=='POST':
         fecha_compra = request.POST.get("fecha_compra")
         observacion = request.POST.get("observacion")
@@ -195,6 +193,5 @@ class CompraDetDelete(SinPrivilegios, generic.DeleteView):
     context_object_name = 'obj'
     
     def get_success_url(self):
-          compra_id=self.kwargs['compra_id']
-          return reverse_lazy('cmp:compras_edit', kwargs={'compra_id': compra_id})
-          """
+        compra_id=self.kwargs['compra_id']
+        return reverse_lazy('cmp:compras_edit', kwargs={'compra_id': compra_id})
