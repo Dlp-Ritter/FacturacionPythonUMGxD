@@ -21,7 +21,7 @@
     <div class="alert alert-info">No Hay Clientes</div>
     {% endif %}
     <div class="buttons-toolbar">
-        <!--<a class="dropdown-item" onclick="return abrir_modal('#')" href="#"><i class="far fa-calendar-plus"></i> Nuevo</a>-->
+        <a class="dropdown-item" onclick="return abrir_modal('{% url 'fac:cliente_new' %}')" href="#"><i class="far fa-calendar-plus"></i> Nuevo</a>
     </div>
 
     <table 
