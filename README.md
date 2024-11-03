@@ -1,6 +1,6 @@
 ## Instrucciones para entrar al contenedor y realizar cambios en Bash
 
-Para acceder al contenedor y hacer cambios desde Bash, usa el siguiente comando:
+Para acceder al contenedor y hacer cambios desde Bash, usar el siguiente comando:
 
 
 ```bash 
@@ -17,7 +17,7 @@ docker compose exec db psql -d postgresdbProject -U admin
 ```
 
 #### Ejemplo para consultar datos de una tabla
-Para ver los datos de la tabla inv_categoria, ejecuta:
+Para ver los datos de la tabla inv_categoria, ejecutar:
 
 ```sql
 SELECT * FROM inv_categoria;
@@ -25,11 +25,7 @@ SELECT * FROM inv_categoria;
 
 #### Consideraciones para las Migraciones en Django
 
-Asegúrate de tener en cuenta las migraciones de cada app de Django para la versión en Linux. Revisa los videos:
-
-* Migraciones en Django y primera migración
-* Migración del modelo categoría
-* Migración del modelo subcategoría
+Asegúrarse de tener en cuenta las migraciones luego de clonar o copiar el repositorio ya que de otro modo no funcionara.
 
 ##### Para hacer las migraciones
 Entrar al contenedor con el comando del principio
