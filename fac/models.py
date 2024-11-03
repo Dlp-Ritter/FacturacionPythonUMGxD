@@ -5,7 +5,7 @@ from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 from django.db.models import Sum
 
-from bases.models import ClaseModelo
+from bases.models import ClaseModelo, ClaseModelo2
 from inv.models import Producto
 
 class Cliente(ClaseModelo):
@@ -43,7 +43,7 @@ class Cliente(ClaseModelo):
     class Meta:
         verbose_name_plural = "Clientes"
 
-""" 
+
 class FacturaEnc(ClaseModelo2):
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
     fecha = models.DateTimeField(auto_now_add=True)
@@ -90,7 +90,7 @@ class FacturaDet(ClaseModelo2):
             ('sup_caja_facturadet','Permisos de Supervisor de Caja Detalle')
         ]
 
-
+"""
 @receiver(post_save, sender=FacturaDet)
 def detalle_fac_guardar(sender,instance,**kwargs):
     factura_id = instance.factura.id

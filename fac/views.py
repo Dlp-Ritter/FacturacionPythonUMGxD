@@ -4,8 +4,8 @@ from django.views import generic
 
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
-#from django.contrib.auth.decorators import login_required, permission_required
-#from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required, permission_required
+from django.http import HttpResponse
 #from datetime import datetime
 #from django.contrib import messages
 
@@ -88,7 +88,7 @@ class ClienteEdit(VistaBaseEdit):
         print(form_class,form,context)
         return self.render_to_response(context)
 
-"""
+
 @login_required(login_url="/login/")
 @permission_required("fac.change_cliente",login_url="/login/")
 def clienteInactivar(request,id):
@@ -103,6 +103,7 @@ def clienteInactivar(request,id):
     
     return HttpResponse("FAIL")
 
+"""
 class FacturaView(SinPrivilegios, generic.ListView):
     model = FacturaEnc
     template_name = "fac/factura_list.html"
