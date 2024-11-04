@@ -90,7 +90,7 @@ class FacturaDet(ClaseModelo2):
             ('sup_caja_facturadet','Permisos de Supervisor de Caja Detalle')
         ]
 
-"""
+
 @receiver(post_save, sender=FacturaDet)
 def detalle_fac_guardar(sender,instance,**kwargs):
     factura_id = instance.factura.id
@@ -117,4 +117,3 @@ def detalle_fac_guardar(sender,instance,**kwargs):
         cantidad = int(prod.existencia) - int(instance.cantidad)
         prod.existencia = cantidad
         prod.save()  
-"""

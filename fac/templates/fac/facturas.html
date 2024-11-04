@@ -6,7 +6,7 @@
 <div class="card shadow mb-4">
     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
         <a href="#" class="btn btn-danger">Guardar</a>
-        <a href="{% url 'fac:factura_imprimir_one' enc.id %}" class="btn btn-success" target="_factura">Imprimir</a>
+        <a href="{% url 'fac:factura_imprimir_one' enc.id #}" class="btn btn-success" target="_factura">Imprimir</a>
         <a href="{% url 'fac:factura_list' %}" class="btn btn-info">Cancelar</a>
     </div>
     <div class="card-body">
@@ -413,7 +413,7 @@
 
         if(idCliente===null || idCliente===undefined || idCliente==0){
             // url = "/fac/clientes/new" + qs;
-            url = "{% url 'fac:fac_cliente_add' %}" + qs
+            url = "{% url 'fac:fac_cliente_add' #}" + qs
             //alert(url);
             // abrir_modal(url);
         }else{
@@ -428,7 +428,7 @@
 $("#popup").on('hidden.bs.modal',function(){
     const a = $("#id").val()
     // alert(a)
-    var url="{% url 'api:cliente_list' %}"
+    var url="{% url 'api:cliente_list' #}"
     $.ajax({
         type:"GET",
         url:url,

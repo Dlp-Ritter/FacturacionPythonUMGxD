@@ -1,4 +1,4 @@
-from django.shortcuts import render#,redirect
+from django.shortcuts import render,redirect
 
 from django.views import generic
 
@@ -6,17 +6,17 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required, permission_required
 from django.http import HttpResponse
-#from datetime import datetime
-#from django.contrib import messages
+from datetime import datetime
+from django.contrib import messages
 
 from django.contrib.auth import authenticate
 
 from bases.views import SinPrivilegios
 
-from .models import Cliente#, FacturaEnc, FacturaDet
+from .models import Cliente, FacturaEnc, FacturaDet
 from .forms import ClienteForm
-#import inv.views as inv
-#from inv.models import Producto
+import inv.views as inv
+from inv.models import Producto
 
 class ClienteView(SinPrivilegios, generic.ListView):
     model = Cliente
@@ -103,7 +103,7 @@ def clienteInactivar(request,id):
     
     return HttpResponse("FAIL")
 
-"""
+
 class FacturaView(SinPrivilegios, generic.ListView):
     model = FacturaEnc
     template_name = "fac/factura_list.html"
@@ -305,4 +305,3 @@ def cliente_add_modify(request,pk=None):
         return HttpResponse(id)
     
     return render(request,template_name,context)
-"""
