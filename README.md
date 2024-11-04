@@ -1,12 +1,27 @@
 ## Instrucciones para entrar al contenedor y realizar cambios en Bash
 
-Para acceder al contenedor y hacer cambios desde Bash, usar el siguiente comando:
+#### Consideraciones para las Migraciones en Django
 
+Asegúrarse de tener en cuenta las migraciones luego de clonar o copiar el repositorio ya que de otro modo no funcionara.
+
+##### Para hacer las migraciones
+Entrar al contenedor con el comando:
 
 ```bash 
 docker compose exec web /bin/bash
 ```
 
+Ya dentro ejecutar lo siguiente para generar las migraciones.
+
+```python
+python manage.py makemigrations
+```
+
+Ya hecho lo anterior se puede ejecutar las migraciónes
+
+```python
+python manage.py migrate
+```
 El contenedor se llama web, por si acaso 😄. Una vez dentro,se pueden realizar las tareas necesarias
 
 ### Acceder a PostgreSQL usando psql
@@ -23,25 +38,3 @@ Para ver los datos de la tabla inv_categoria, ejecutar:
 SELECT * FROM inv_categoria;
 ```
 
-#### Consideraciones para las Migraciones en Django
-
-Asegúrarse de tener en cuenta las migraciones luego de clonar o copiar el repositorio ya que de otro modo no funcionara.
-
-##### Para hacer las migraciones
-Entrar al contenedor con el comando del principio
-
-```bash 
-docker compose exec web /bin/bash
-```
-
-Ya dentro ejecutar lo siguiente para generar las migraciones.
-
-```python
-python manage.py makemigrations
-```
-
-Ya hecho lo anterior se puede ejecutar la migración de uno o todos los modelos
-
-```python
-python manage.py migrate
-```
