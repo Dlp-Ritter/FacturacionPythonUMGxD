@@ -15,7 +15,7 @@ Esto descargara la imagen de Python, Django, PostgreSQL, lo implementara en un e
 Asegurarse de realizar las migraciones correspondientes luego de clonar o de copiar del pendrive el proyecto, ya que estos son necesarios para el funcionamiento del proyecto.
 
 ##### Para hacer las migraciones
-Entrar al contenedor con el comando del principio
+Entrar al contenedor con el comando.
 
 ```bash 
 docker compose exec web /bin/bash
@@ -31,12 +31,6 @@ Ya hecho lo anterior se puede ejecutar las migraciones
 
 ```python
 python manage.py migrate
-```
-
-El contenedor se llama web, por si acaso 😄. Una vez dentro, se pueden realizar las tareas necesarias, como crear un superusuario en Django:
-
-```bash
-python manage.py createsuperuser
 ```
 
 Luego de realizar las migraciones simplemente ejecutar nuevamente el siguiente comando y ya todo estará listo:
