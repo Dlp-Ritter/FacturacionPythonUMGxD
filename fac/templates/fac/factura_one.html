@@ -15,10 +15,15 @@
             }
     </style>
 </head>
-<body onload="window.print();window.close()" class="receipt">
+<body onload="window.print()" class="receipt">
+    <script type="text/javascript">//script para cerrar de manera automatica la venta de impresion luego del error del window.close()
+        window.addEventListener('afterprint', (event) => {
+            window.close();
+        });
+    </script>
     <div class="col-md-1 col-sm-1 col-xs-1 col-xl-1">
         <center>
-            <b class="text-center">Tienda UDEMY DEBSCONSULTORES</b><br> 
+            <b class="text-center">Tienda BD PacoMike SC2</b><br> 
             <small>Direccion</small><br>
             <small>FACTURA No. {{enc.factura}}</small><br>
         </center>
@@ -81,9 +86,11 @@
             <center>
                 Creada por:  {{enc.uc}} - Fecha:  {{enc.fc}}
                 <br>
-                <i>&copy; &reg; <b>Daniel Bojorge y/o DEBS Consultores</b><br> - debsconsultores@gmail.com</i> 
+                <i>&copy; &reg; <b>Un humano más, en este mundo.</b><br> - blabla@bla.com</i> 
             </center>
         </small>
+
+        
         </div>
     </div>
 </body>

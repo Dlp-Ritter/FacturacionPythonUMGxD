@@ -15,7 +15,7 @@ class ProveedorForm(forms.ModelForm):
             self.fields[field].widget.attrs.update({
                 'class': 'form-control'
             })
-"""
+
     def clean(self):
         try:
             sc = Proveedor.objects.get(
@@ -31,7 +31,7 @@ class ProveedorForm(forms.ModelForm):
         except Proveedor.DoesNotExist:
             pass
         return self.cleaned_data
-  """
+ 
 class ComprasEncForm(forms.ModelForm):
     fecha_compra = forms.DateInput()
     fecha_factura = forms.DateInput()

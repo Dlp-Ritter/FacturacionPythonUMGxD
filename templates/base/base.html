@@ -382,23 +382,99 @@
 
         <!-- Begin Page Content -->{% block page_content %}
         <div class="container-fluid">
-
-            <!-- Page Heading -->
-            <h1 class="h3 mb-4 text-gray-800">Blank Page</h1>
-  
+          <!-- Page Heading -->
+          <h1 class="h3 mb-4 text-gray-800">Sistema de Facturación BD I: Docker, Django y PostgreSQL</h1>
+      
+          <!-- Row for summary cards -->
+          <div class="row">
+              <!-- Card for invoicing overview -->
+              <div class="col-xl-4 col-md-6 mb-4">
+                  <div class="card border-left-primary shadow h-100 py-2">
+                      <div class="card-body">
+                          <div class="row no-gutters align-items-center">
+                              <div class="col mr-2">
+                                  <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                      Facturas Generadas
+                                  </div>
+                                  <div class="h5 mb-0 font-weight-bold text-gray-800">Resumen de todas las facturas emitidas hasta la fecha</div>
+                              </div>
+                              <div class="col-auto">
+                                  <i class="fas fa-file-invoice fa-3x text-gray-300"></i>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+      
+              <!-- Card for customer insights -->
+              <div class="col-xl-4 col-md-6 mb-4">
+                  <div class="card border-left-success shadow h-100 py-2">
+                      <div class="card-body">
+                          <div class="row no-gutters align-items-center">
+                              <div class="col mr-2">
+                                  <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                      Clientes Registrados
+                                  </div>
+                                  <div class="h5 mb-0 font-weight-bold text-gray-800">Total de clientes en el sistema</div>
+                              </div>
+                              <div class="col-auto">
+                                  <i class="fas fa-users fa-3x text-gray-300"></i>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+      
+              <!-- Card for financial summary -->
+              <div class="col-xl-4 col-md-6 mb-4">
+                  
+              </div>
           </div>
-          {% endblock %}
-          <!-- /.container-fluid -->
-          {% block footer %}
-  
-        </div>
+      
+          <!-- Row for graphical representations and descriptions -->
+          <div class="row">
+              <!-- Pie chart example -->
+              <div class="col-lg-6 mb-4">
+                  
+              </div>
+      
+              <!-- Bar chart example -->
+              <div class="col-lg-6 mb-4">
+                  
+              </div>
+          </div>
+      
+          <!-- Row for additional details or actions -->
+          <div class="row">
+              <div class="col-lg-12">
+                  <div class="card shadow mb-4">
+                      <div class="card-header py-3">
+                          <h6 class="m-0 font-weight-bold text-primary">Acciones Rápidas</h6>
+                      </div>
+                      <div class="card-body">
+                          <div class="row">
+                              <!-- Quick action buttons -->
+                              <div class="col-md-4 text-center mb-4">
+                                  <a href="{% url 'fac:factura_list' %}" class="btn btn-primary btn-lg">Generar Nueva Factura</a>
+                              </div>
+                              <div class="col-md-4 text-center mb-4">
+                                  <a href="{% url 'fac:cliente_list' %}" class="btn btn-success btn-lg">Registrar Nuevo Cliente</a>
+                              </div>
+                              
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      
         <!-- End of Main Content -->
   
         <!-- Footer -->
         <footer class="sticky-footer bg-white">
           <div class="container my-auto">
             <div class="copyright text-center my-auto">
-              <span>Copyright &copy; Your Website 2024</span>
+              <span>Copyright &copy; Base de Datos I 2024</span>
             </div>
           </div>
         </footer>
